@@ -90,19 +90,8 @@ El projecte porta dos defectes reals a la versió original que les proves detect
 
 ## Nota sobre `() ->` a les proves
 
-Als casos negatius surt `assertThrows(IllegalStateException.class, () -> jordi.afegirCotxe(seat));`. El `() -> ...` és la mateixa idea que el mètode `provar` que vam comentar abans: es passa un tros de codi que *no s'executa fins que `assertThrows` el crida dins d'un `try/catch`*, per comprovar que llança l'excepció esperada. És la forma estàndard d'escriure aquestes proves a JUnit 5.
+Als casos negatius surt `assertThrows(IllegalStateException.class, () -> jordi.afegirCotxe(seat));`. El `() -> ...` vol dir què es passa un tros de codi que *no s'executa fins que `assertThrows` el crida dins d'un `try/catch`*, per comprovar que llança l'excepció esperada. És la forma estàndard d'escriure aquestes proves a JUnit 5.
 
 ## Nota sobre l'herència a les proves
 
-`CotxeStub` és l'únic lloc amb `extends` i `@Override`. És un *stub* (mòdul simulat) necessari per mostrar la integració descendent. Si no vols introduir-ho, pots esborrar `CotxeStub.java` i els casos CP-27 i CP-28 sense afectar la resta.
-
-## Nota sobre la verificació
-
-Aquest projecte s'ha preparat en un entorn sense accés a Maven Central, així que **no s'ha pogut executar amb JUnit 5 real**. Les 30 proves es van executar amb un executor mínim que imita l'API de JUnit (`@Test`, `@BeforeEach`, `@DisplayName` i les asserts utilitzades), amb aquests resultats: v1.0 → 28 OK i 2 KO; v1.1 → 30 OK. El `pom.xml` només s'ha pogut validar de forma estructural. Si `mvn test` dona un resultat diferent, avisa'm.
-
-## Possibles ampliacions
-
-- Afegir **JaCoCo** al `pom.xml` per mesurar la cobertura de sentències i branques automàticament.
-- Afegir validacions (DNI, matrícula) i els casos de prova positius i negatius corresponents.
-- Fer que `mostrarCotxes()` retorni un text en lloc d'escriure per pantalla, per provar-lo sense capturar `System.out`.
-- Que cada grup d'alumnes escrigui un cas de prova més per a cada tipus.
+`CotxeStub` és l'únic lloc amb `extends` i `@Override`. És un *stub* (mòdul simulat) necessari per mostrar la integració descendent. L'herència contè els mateixos atributs i funcions què al pare (extends) i l'@Override redefineix funcions declarades al pare.
